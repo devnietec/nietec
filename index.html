@@ -1,0 +1,1296 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="NIETEC - Soluciones integrales en ingeniería, mantenimiento industrial y comercial, obras civiles y comercialización de equipos.">
+  <title>NIETEC | Soluciones Integrales en Ingeniería, Mantenimiento y Construcción</title>
+  
+  <!-- Tipografía Google Fonts: Inter -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <style>
+    /* ==========================================================================
+       1. VARIABLES Y SISTEMA DE DISEÑO (CSS CUSTOM PROPERTIES)
+       ========================================================================== */
+    :root {
+      /* Paleta Corporativa Industrial */
+      --color-primary-dark: #0b1325;       /* Azul marino profundo / fondo navbar */
+      --color-primary: #152238;            /* Azul marino corporativo */
+      --color-primary-light: #1f3354;      /* Azul pizarra */
+      --color-accent: #f59e0b;             /* Amarillo/Naranja de seguridad industrial */
+      --color-accent-hover: #d97706;       /* Hover acento */
+      --color-text-main: #1e293b;          /* Gris oscuro legible */
+      --color-text-muted: #64748b;         /* Gris secundario / subtítulos */
+      --color-bg-light: #f8fafc;           /* Fondo secciones alternas */
+      --color-bg-card: #ffffff;            /* Fondo tarjetas */
+      --color-border: #e2e8f0;             /* Líneas y bordes sutiles */
+      --color-white: #ffffff;
+
+      /* Tipografía y Espaciado */
+      --font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      --container-max-width: 1200px;
+      --section-spacing: 5rem 1.5rem;
+      --transition-base: 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+      --radius-sm: 6px;
+      --radius-md: 10px;
+      --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.08);
+      --shadow-md: 0 4px 14px rgba(0, 0, 0, 0.08);
+      --shadow-lg: 0 10px 25px rgba(0, 0, 0, 0.12);
+    }
+
+    /* ==========================================================================
+       2. RESETEO Y ESTILOS BASE (MOBILE FIRST)
+       ========================================================================== */
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+      font-size: 16px;
+    }
+
+    body {
+      font-family: var(--font-family);
+      color: var(--color-text-main);
+      background-color: var(--color-white);
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+      transition: color var(--transition-base);
+    }
+
+    ul {
+      list-style: none;
+    }
+
+    img, svg {
+      display: block;
+      max-width: 100%;
+    }
+
+    .container {
+      width: 100%;
+      max-width: var(--container-max-width);
+      margin: 0 auto;
+      padding: 0 1.25rem;
+    }
+
+    /* Encabezados y títulos de sección */
+    .section-header {
+      text-align: center;
+      max-width: 720px;
+      margin: 0 auto 3.5rem;
+    }
+
+    .section-eyebrow {
+      display: inline-block;
+      font-size: 0.8125rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--color-accent);
+      margin-bottom: 0.75rem;
+    }
+
+    .section-title {
+      font-size: 2rem;
+      font-weight: 800;
+      color: var(--color-primary);
+      line-height: 1.25;
+      margin-bottom: 1rem;
+    }
+
+    .section-desc {
+      font-size: 1.05rem;
+      color: var(--color-text-muted);
+      line-height: 1.65;
+    }
+
+    /* Botones reutilizables */
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 0.875rem 1.85rem;
+      font-size: 0.95rem;
+      font-weight: 600;
+      border-radius: var(--radius-sm);
+      cursor: pointer;
+      border: 2px solid transparent;
+      transition: all var(--transition-base);
+      text-align: center;
+    }
+
+    .btn-primary {
+      background-color: var(--color-accent);
+      color: var(--color-primary-dark);
+      border-color: var(--color-accent);
+    }
+
+    .btn-primary:hover {
+      background-color: var(--color-accent-hover);
+      border-color: var(--color-accent-hover);
+      transform: translateY(-2px);
+      box-shadow: 0 6px 18px rgba(245, 158, 11, 0.35);
+    }
+
+    .btn-secondary {
+      background-color: transparent;
+      color: var(--color-white);
+      border-color: rgba(255, 255, 255, 0.4);
+    }
+
+    .btn-secondary:hover {
+      background-color: rgba(255, 255, 255, 0.1);
+      border-color: var(--color-white);
+      transform: translateY(-2px);
+    }
+
+    /* ==========================================================================
+       3. HEADER Y NAVEGACIÓN PEGAYOSA (STICKY HEADER)
+       ========================================================================== */
+    .site-header {
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      background-color: rgba(11, 19, 37, 0.95);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+    }
+
+    .navbar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 72px;
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-size: 1.5rem;
+      font-weight: 800;
+      color: var(--color-white);
+      letter-spacing: -0.02em;
+    }
+
+    .logo-badge {
+      display: inline-block;
+      width: 10px;
+      height: 10px;
+      background-color: var(--color-accent);
+      border-radius: 2px;
+    }
+
+    .nav-toggle {
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: 0.5rem;
+    }
+
+    .nav-toggle span {
+      display: block;
+      width: 24px;
+      height: 2px;
+      background-color: var(--color-white);
+      transition: all var(--transition-base);
+    }
+
+    .nav-menu {
+      position: absolute;
+      top: 72px;
+      left: 0;
+      width: 100%;
+      background-color: var(--color-primary-dark);
+      flex-direction: column;
+      align-items: center;
+      gap: 1.25rem;
+      padding: 2rem 1rem;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+      display: none;
+    }
+
+    .nav-menu.is-active {
+      display: flex;
+    }
+
+    .nav-link {
+      font-size: 0.95rem;
+      font-weight: 500;
+      color: rgba(255, 255, 255, 0.8);
+      position: relative;
+      padding: 0.25rem 0;
+    }
+
+    .nav-link:hover,
+    .nav-link.active {
+      color: var(--color-white);
+    }
+
+    .nav-link::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 0;
+      height: 2px;
+      background-color: var(--color-accent);
+      transition: width var(--transition-base);
+    }
+
+    .nav-link:hover::after,
+    .nav-link.active::after {
+      width: 100%;
+    }
+
+    /* ==========================================================================
+       4. HERO SECTION
+       ========================================================================== */
+    .hero {
+      position: relative;
+      min-height: 85vh;
+      display: flex;
+      align-items: center;
+      color: var(--color-white);
+      background-color: var(--color-primary-dark);
+      /* Patrón industrial geométrico + gradiente oscuro */
+      background-image: 
+        radial-gradient(circle at 80% 20%, rgba(245, 158, 11, 0.15) 0%, transparent 40%),
+        linear-gradient(135deg, rgba(11, 19, 37, 0.94) 0%, rgba(21, 34, 56, 0.88) 100%),
+        repeating-linear-gradient(45deg, rgba(255, 255, 255, 0.015) 0, rgba(255, 255, 255, 0.015) 1px, transparent 0, transparent 40px);
+      background-size: cover;
+      background-position: center;
+      padding: 4rem 0;
+      overflow: hidden;
+    }
+
+    .hero-content {
+      max-width: 780px;
+    }
+
+    .hero-tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      background-color: rgba(255, 255, 255, 0.08);
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      padding: 0.35rem 0.85rem;
+      border-radius: 50px;
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: var(--color-accent);
+      margin-bottom: 1.5rem;
+    }
+
+    .hero-title {
+      font-size: 2.35rem;
+      font-weight: 800;
+      line-height: 1.15;
+      letter-spacing: -0.02em;
+      margin-bottom: 1.25rem;
+      color: var(--color-white);
+    }
+
+    .hero-subtitle {
+      font-size: 1.125rem;
+      color: rgba(255, 255, 255, 0.82);
+      line-height: 1.6;
+      margin-bottom: 2rem;
+      max-width: 650px;
+    }
+
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+
+    /* Franja de Indicadores de Confianza */
+    .hero-stats {
+      margin-top: 3.5rem;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+      gap: 1.5rem;
+      border-top: 1px solid rgba(255, 255, 255, 0.12);
+      padding-top: 2rem;
+    }
+
+    .stat-item h3 {
+      font-size: 1.75rem;
+      font-weight: 800;
+      color: var(--color-accent);
+      margin-bottom: 0.25rem;
+    }
+
+    .stat-item p {
+      font-size: 0.875rem;
+      color: rgba(255, 255, 255, 0.7);
+    }
+
+    /* ==========================================================================
+       5. SECCIÓN NOSOTROS
+       ========================================================================== */
+    .about {
+      padding: var(--section-spacing);
+      background-color: var(--color-white);
+    }
+
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 2.5rem;
+      align-items: center;
+    }
+
+    .about-text p {
+      font-size: 1.05rem;
+      color: var(--color-text-main);
+      margin-bottom: 1.25rem;
+      line-height: 1.75;
+    }
+
+    .about-pillars {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 1rem;
+      margin-top: 1.5rem;
+    }
+
+    .pillar-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 0.875rem;
+      padding: 1rem;
+      background-color: var(--color-bg-light);
+      border-left: 3px solid var(--color-accent);
+      border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+    }
+
+    .pillar-item strong {
+      display: block;
+      color: var(--color-primary);
+      margin-bottom: 0.2rem;
+    }
+
+    .pillar-item span {
+      font-size: 0.9rem;
+      color: var(--color-text-muted);
+    }
+
+    .about-highlight-box {
+      background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-primary-dark) 100%);
+      color: var(--color-white);
+      padding: 2.5rem;
+      border-radius: var(--radius-md);
+      box-shadow: var(--shadow-lg);
+      position: relative;
+    }
+
+    .about-highlight-box h3 {
+      font-size: 1.35rem;
+      font-weight: 700;
+      margin-bottom: 1rem;
+      color: var(--color-accent);
+    }
+
+    .about-highlight-box ul {
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+    }
+
+    .about-highlight-box li {
+      position: relative;
+      padding-left: 1.5rem;
+      font-size: 0.95rem;
+      color: rgba(255, 255, 255, 0.85);
+    }
+
+    .about-highlight-box li::before {
+      content: '✓';
+      position: absolute;
+      left: 0;
+      color: var(--color-accent);
+      font-weight: bold;
+    }
+
+    /* ==========================================================================
+       6. SECCIÓN SERVICIOS (GRID CON CARDS)
+       ========================================================================== */
+    .services {
+      padding: var(--section-spacing);
+      background-color: var(--color-bg-light);
+    }
+
+    .services-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 1.75rem;
+    }
+
+    .service-card {
+      background-color: var(--color-bg-card);
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-md);
+      padding: 2rem;
+      transition: all var(--transition-base);
+      display: flex;
+      flex-direction: column;
+      height: 100%;
+    }
+
+    .service-card:hover {
+      transform: translateY(-5px);
+      box-shadow: var(--shadow-lg);
+      border-color: rgba(245, 158, 11, 0.5);
+    }
+
+    .service-icon {
+      width: 52px;
+      height: 52px;
+      background-color: rgba(21, 34, 56, 0.05);
+      border-radius: var(--radius-sm);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 1.5rem;
+      color: var(--color-accent);
+      transition: background-color var(--transition-base);
+    }
+
+    .service-card:hover .service-icon {
+      background-color: var(--color-primary);
+    }
+
+    .service-card h3 {
+      font-size: 1.25rem;
+      font-weight: 700;
+      color: var(--color-primary);
+      margin-bottom: 0.75rem;
+    }
+
+    .service-card p {
+      font-size: 0.95rem;
+      color: var(--color-text-muted);
+      line-height: 1.6;
+      margin-bottom: 1.25rem;
+    }
+
+    .service-tags {
+      margin-top: auto;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.4rem;
+      padding-top: 1rem;
+      border-top: 1px dashed var(--color-border);
+    }
+
+    .service-tag {
+      font-size: 0.775rem;
+      background-color: #f1f5f9;
+      color: var(--color-primary-light);
+      padding: 0.25rem 0.55rem;
+      border-radius: 4px;
+      font-weight: 500;
+    }
+
+    /* ==========================================================================
+       7. SECCIÓN COMERCIALIZACIÓN (PRODUCTOS & EQUIPOS)
+       ========================================================================== */
+    .products {
+      padding: var(--section-spacing);
+      background-color: var(--color-white);
+    }
+
+    .products-wrapper {
+      background-color: var(--color-primary-dark);
+      color: var(--color-white);
+      border-radius: var(--radius-md);
+      padding: 3rem 2rem;
+      box-shadow: var(--shadow-md);
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 2.5rem;
+      align-items: center;
+    }
+
+    .products-info h2 {
+      font-size: 2rem;
+      font-weight: 800;
+      margin-bottom: 1rem;
+      color: var(--color-white);
+    }
+
+    .products-info p {
+      font-size: 1.05rem;
+      color: rgba(255, 255, 255, 0.8);
+      margin-bottom: 1.5rem;
+      line-height: 1.7;
+    }
+
+    .products-cards {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 1.25rem;
+    }
+
+    .product-box {
+      background-color: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      border-radius: var(--radius-sm);
+      padding: 1.5rem;
+      transition: all var(--transition-base);
+    }
+
+    .product-box:hover {
+      background-color: rgba(255, 255, 255, 0.09);
+      border-color: var(--color-accent);
+      transform: translateX(4px);
+    }
+
+    .product-box h4 {
+      font-size: 1.1rem;
+      color: var(--color-accent);
+      margin-bottom: 0.5rem;
+    }
+
+    .product-box p {
+      font-size: 0.875rem;
+      color: rgba(255, 255, 255, 0.7);
+    }
+
+    /* ==========================================================================
+       8. SECCIÓN CONTACTO
+       ========================================================================== */
+    .contact {
+      padding: var(--section-spacing);
+      background-color: var(--color-bg-light);
+    }
+
+    .contact-layout {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 2.5rem;
+    }
+
+    .contact-info {
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
+    }
+
+    .contact-card {
+      background-color: var(--color-bg-card);
+      padding: 1.5rem;
+      border-radius: var(--radius-sm);
+      border: 1px solid var(--color-border);
+      display: flex;
+      align-items: flex-start;
+      gap: 1rem;
+    }
+
+    .contact-card-icon {
+      background-color: rgba(245, 158, 11, 0.15);
+      color: var(--color-accent-hover);
+      width: 44px;
+      height: 44px;
+      border-radius: var(--radius-sm);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+
+    .contact-card-text h4 {
+      font-size: 1rem;
+      color: var(--color-primary);
+      margin-bottom: 0.25rem;
+    }
+
+    .contact-card-text p, .contact-card-text a {
+      font-size: 0.95rem;
+      color: var(--color-text-muted);
+    }
+
+    .contact-card-text a:hover {
+      color: var(--color-accent-hover);
+    }
+
+    .contact-form-container {
+      background-color: var(--color-bg-card);
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-md);
+      padding: 2.25rem;
+      box-shadow: var(--shadow-sm);
+    }
+
+    .form-group {
+      margin-bottom: 1.25rem;
+    }
+
+    .form-group label {
+      display: block;
+      font-size: 0.875rem;
+      font-weight: 600;
+      color: var(--color-primary);
+      margin-bottom: 0.4rem;
+    }
+
+    .form-control {
+      width: 100%;
+      padding: 0.75rem 1rem;
+      font-family: inherit;
+      font-size: 0.95rem;
+      color: var(--color-text-main);
+      background-color: var(--color-white);
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-sm);
+      outline: none;
+      transition: border-color var(--transition-base), box-shadow var(--transition-base);
+    }
+
+    .form-control:focus {
+      border-color: var(--color-primary);
+      box-shadow: 0 0 0 3px rgba(21, 34, 56, 0.12);
+    }
+
+    textarea.form-control {
+      resize: vertical;
+      min-height: 120px;
+    }
+
+    .form-status {
+      display: none;
+      margin-top: 1rem;
+      padding: 0.85rem;
+      border-radius: var(--radius-sm);
+      font-size: 0.9rem;
+      text-align: center;
+    }
+
+    .form-status.success {
+      display: block;
+      background-color: #ecfdf5;
+      color: #065f46;
+      border: 1px solid #a7f3d0;
+    }
+
+    /* ==========================================================================
+       9. FOOTER
+       ========================================================================== */
+    .site-footer {
+      background-color: var(--color-primary-dark);
+      color: rgba(255, 255, 255, 0.7);
+      padding: 4rem 0 2rem;
+      border-top: 1px solid rgba(255, 255, 255, 0.08);
+    }
+
+    .footer-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 2.5rem;
+      margin-bottom: 3rem;
+    }
+
+    .footer-brand .logo {
+      margin-bottom: 1rem;
+    }
+
+    .footer-brand p {
+      font-size: 0.9rem;
+      line-height: 1.6;
+      max-width: 320px;
+    }
+
+    .footer-links h4,
+    .footer-social h4 {
+      font-size: 1rem;
+      font-weight: 700;
+      color: var(--color-white);
+      margin-bottom: 1.25rem;
+      letter-spacing: 0.02em;
+    }
+
+    .footer-links ul {
+      display: flex;
+      flex-direction: column;
+      gap: 0.65rem;
+    }
+
+    .footer-links a {
+      font-size: 0.9rem;
+    }
+
+    .footer-links a:hover {
+      color: var(--color-accent);
+      padding-left: 4px;
+    }
+
+    .social-links {
+      display: flex;
+      gap: 0.875rem;
+    }
+
+    .social-icon {
+      width: 38px;
+      height: 38px;
+      background-color: rgba(255, 255, 255, 0.08);
+      border-radius: var(--radius-sm);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--color-white);
+      transition: all var(--transition-base);
+    }
+
+    .social-icon:hover {
+      background-color: var(--color-accent);
+      color: var(--color-primary-dark);
+      transform: translateY(-2px);
+    }
+
+    .footer-bottom {
+      border-top: 1px solid rgba(255, 255, 255, 0.1);
+      padding-top: 2rem;
+      text-align: center;
+      font-size: 0.85rem;
+      color: rgba(255, 255, 255, 0.5);
+    }
+
+    /* ==========================================================================
+       10. MEDIA QUERIES (RESPONSIVE TABLET & DESKTOP)
+       ========================================================================== */
+    @media (min-width: 768px) {
+      .section-title {
+        font-size: 2.4rem;
+      }
+
+      .hero-title {
+        font-size: 3.25rem;
+      }
+
+      .services-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .about-grid {
+        grid-template-columns: 1.2fr 1fr;
+      }
+
+      .products-cards {
+        grid-template-columns: repeat(3, 1fr);
+      }
+
+      .contact-layout {
+        grid-template-columns: 1fr 1.3fr;
+      }
+
+      .footer-grid {
+        grid-template-columns: 2fr 1fr 1fr;
+      }
+
+      .form-row {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 1rem;
+      }
+    }
+
+    @media (min-width: 992px) {
+      .nav-toggle {
+        display: none;
+      }
+
+      .nav-menu {
+        position: static;
+        display: flex;
+        flex-direction: row;
+        width: auto;
+        background: transparent;
+        border: none;
+        padding: 0;
+        gap: 2rem;
+      }
+
+      .services-grid {
+        grid-template-columns: repeat(4, 1fr);
+      }
+
+      .hero {
+        min-height: 90vh;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ==========================================================================
+       HEADER / NAVEGACIÓN PEGAYOSA (STICKY)
+       ========================================================================== -->
+  <header class="site-header" id="header">
+    <div class="container">
+      <nav class="navbar" aria-label="Navegación principal">
+        <a href="#inicio" class="logo" aria-label="NIETEC - Inicio">
+          <span class="logo-badge" aria-hidden="true"></span>
+          NIETEC
+        </a>
+
+        <!-- Botón menú hamburguesa (Móvil) -->
+        <button class="nav-toggle" id="navToggle" aria-label="Abrir menú de navegación" aria-expanded="false">
+          <span></span>
+          <span></span>
+          <span></span>
+        </button>
+
+        <!-- Enlaces de navegación -->
+        <ul class="nav-menu" id="navMenu">
+          <li><a href="#inicio" class="nav-link active">Inicio</a></li>
+          <li><a href="#nosotros" class="nav-link">Nosotros</a></li>
+          <li><a href="#servicios" class="nav-link">Servicios</a></li>
+          <li><a href="#productos" class="nav-link">Productos</a></li>
+          <li><a href="#contacto" class="nav-link">Contacto</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero" id="inicio">
+      <div class="container">
+        <div class="hero-content">
+          <span class="hero-tag">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+            Solidez y Seguridad Industrial
+          </span>
+          <h1 class="hero-title">Soluciones Integrales en Ingeniería, Mantenimiento y Construcción</h1>
+          <p class="hero-subtitle">
+            Acompañamos a su empresa con ejecución de alta precisión técnica, cumplimiento normativo estricto y respuestas operativas diseñadas a la medida de su infraestructura.
+          </p>
+          <div class="hero-actions">
+            <a href="#contacto" class="btn btn-primary">Cotiza tu Proyecto</a>
+            <a href="#servicios" class="btn btn-secondary">Explorar Servicios</a>
+          </div>
+
+          <!-- Métricas de respaldo y confianza -->
+          <div class="hero-stats">
+            <div class="stat-item">
+              <h3>100%</h3>
+              <p>Compromiso en Plazos</p>
+            </div>
+            <div class="stat-item">
+              <h3>Multi-sector</h3>
+              <p>Industrial, Comercial y Minería</p>
+            </div>
+            <div class="stat-item">
+              <h3>Llave en Mano</h3>
+              <p>Soluciones de Principio a Fin</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==========================================================================
+         SECCIÓN NOSOTROS
+         ========================================================================== -->
+    <section class="about" id="nosotros">
+      <div class="container">
+        <div class="section-header">
+          <span class="section-eyebrow">Sobre NIETEC</span>
+          <h2 class="section-title">Solidez Operativa y Capacidad Técnica Multidisciplinaria</h2>
+          <p class="section-desc">
+            Gestionamos requerimientos de alta exigencia combinando experiencia de campo, rigor normativo y capacidad de respuesta inmediata.
+          </p>
+        </div>
+
+        <div class="about-grid">
+          <div class="about-text">
+            <p>
+              <strong>NIETEC</strong> es una empresa integral especializada en la gestión, desarrollo y ejecución de proyectos de ingeniería, obras civiles, mantenimiento preventivo-correctivo y suministro técnico especializado.
+            </p>
+            <p>
+              Nuestra estructura técnica y financiera nos permite participar activamente en licitaciones públicas y privadas, garantizando soluciones llave en mano adaptadas a faenas industriales, complejos hoteleros, redes comerciales y plantas productivas. Respaldamos cada proyecto con rigurosos protocolos de seguridad y estándares de calidad comprobados.
+            </p>
+
+            <div class="about-pillars">
+              <div class="pillar-item">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#f59e0b" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+                <div>
+                  <strong>Continuidad Operativa</strong>
+                  <span>Planes de mantenimiento diseñados para reducir al mínimo paradas no programadas.</span>
+                </div>
+              </div>
+              <div class="pillar-item">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#f59e0b" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+                <div>
+                  <strong>Cumplimiento y Certificación</strong>
+                  <span>Alineados a normativas técnicas, medioambientales y de prevención de riesgos.</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Cuadro de capacidades clave -->
+          <div class="about-highlight-box">
+            <h3>Por qué elegir a NIETEC</h3>
+            <ul>
+              <li>Capacidad demostrada en licitaciones públicas y corporativas.</li>
+              <li>Cobertura integral: desde ingeniería conceptual hasta montaje final.</li>
+              <li>Gestión unificada de contratistas y proveedores críticos.</li>
+              <li>Trazabilidad documental y garantías operativas en cada entrega.</li>
+              <li>Atención para requerimientos de emergencia operativa.</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==========================================================================
+         SECCIÓN SERVICIOS (GRID CON 4 CATEGORÍAS PRINCIPALES)
+         ========================================================================== -->
+    <section class="services" id="servicios">
+      <div class="container">
+        <div class="section-header">
+          <span class="section-eyebrow">Nuestras Capacidades</span>
+          <h2 class="section-title">Servicios Especializados</h2>
+          <p class="section-desc">
+            Agrupamos nuestra experiencia técnica en cuatro divisiones estratégicas para brindar cobertura completa a las demandas de su infraestructura.
+          </p>
+        </div>
+
+        <div class="services-grid">
+          <!-- Tarjeta 1: Ingeniería y Proyectos -->
+          <article class="service-card">
+            <div class="service-icon" aria-hidden="true">
+              <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>
+            </div>
+            <h3>Ingeniería y Proyectos</h3>
+            <p>
+              Desarrollo de proyectos desde su etapa conceptual hasta el expediente técnico definitivo. Realizamos consultoría estratégica, cubicación, modelado y supervisión técnica en terreno.
+            </p>
+            <div class="service-tags">
+              <span class="service-tag">Diseño</span>
+              <span class="service-tag">Gestión</span>
+              <span class="service-tag">Consultoría</span>
+              <span class="service-tag">Licitaciones</span>
+            </div>
+          </article>
+
+          <!-- Tarjeta 2: Instalaciones y Mantenimiento -->
+          <article class="service-card">
+            <div class="service-icon" aria-hidden="true">
+              <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>
+            </div>
+            <h3>Instalaciones y Mantenimiento</h3>
+            <p>
+              Montaje y conservación de redes críticas. Climatización especializada (HVAC), tableros eléctricos de media/baja tensión, redes hidrosanitarias, cableado estructurado y CCTV.
+            </p>
+            <div class="service-tags">
+              <span class="service-tag">HVAC</span>
+              <span class="service-tag">Electricidad</span>
+              <span class="service-tag">Sanitarias</span>
+              <span class="service-tag">Telecom / CCTV</span>
+            </div>
+          </article>
+
+          <!-- Tarjeta 3: Obras y Estructuras -->
+          <article class="service-card">
+            <div class="service-icon" aria-hidden="true">
+              <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18"/><path d="M9 21V9"/></svg>
+            </div>
+            <h3>Obras y Estructuras</h3>
+            <p>
+              Fabricación y montaje de estructuras metálicas, soldadura calificada según norma, obras civiles menores, pavimentos de tránsito pesado, ampliaciones y remodelaciones de naves.
+            </p>
+            <div class="service-tags">
+              <span class="service-tag">Estructuras Metálicas</span>
+              <span class="service-tag">Soldadura</span>
+              <span class="service-tag">Obras Civiles</span>
+              <span class="service-tag">Remodelaciones</span>
+            </div>
+          </article>
+
+          <!-- Tarjeta 4: Mantenimiento Integral -->
+          <article class="service-card">
+            <div class="service-icon" aria-hidden="true">
+              <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg>
+            </div>
+            <h3>Mantenimiento Integral</h3>
+            <p>
+              Facility management continuo para plantas industriales, cadenas comerciales, centros logísticos y hoteles. Programas preventivos con monitoreo periódico de KPIs operativos.
+            </p>
+            <div class="service-tags">
+              <span class="service-tag">Facility Management</span>
+              <span class="service-tag">Hotelería</span>
+              <span class="service-tag">Industria</span>
+              <span class="service-tag">Planes 24/7</span>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==========================================================================
+         SECCIÓN COMERCIALIZACIÓN (PRODUCTOS & EQUIPOS)
+         ========================================================================== -->
+    <section class="products" id="productos">
+      <div class="container">
+        <div class="products-wrapper">
+          <div class="products-info">
+            <span class="section-eyebrow">División Comercial</span>
+            <h2>Comercialización y Suministro de Equipos</h2>
+            <p>
+              Facilitamos la provisión directa de insumos críticos con estándares industriales certificados. Gestionamos importación directa, logística nacional y entrega en faena para asegurar que sus equipos cuenten con repuestos y herramientas de primera línea.
+            </p>
+            <a href="#contacto" class="btn btn-primary">Consultar Catálogo y Cotizaciones</a>
+          </div>
+
+          <div class="products-cards">
+            <div class="product-box">
+              <h4>Herramientas de Precisión</h4>
+              <p>Instrumental de torque, medición calibrada y equipamiento de taller para trabajo pesado.</p>
+            </div>
+            <div class="product-box">
+              <h4>Maquinaria y Repuestos</h4>
+              <p>Equipos de elevación, generadores, bombas industriales y componentes de reemplazo original.</p>
+            </div>
+            <div class="product-box">
+              <h4>Insumos Industriales</h4>
+              <p>Filtros HVAC, consumibles de soldadura, elementos de sujeción técnica y consumibles eléctricos.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==========================================================================
+         SECCIÓN CONTACTO
+         ========================================================================== -->
+    <section class="contact" id="contacto">
+      <div class="container">
+        <div class="section-header">
+          <span class="section-eyebrow">Comunícate con Nosotros</span>
+          <h2 class="section-title">Iniciemos tu Próximo Proyecto</h2>
+          <p class="section-desc">
+            Envíanos las especificaciones de tus requerimientos o agenda una visita técnica con nuestros especialistas.
+          </p>
+        </div>
+
+        <div class="contact-layout">
+          <!-- Información y Canales -->
+          <div class="contact-info">
+            <div class="contact-card">
+              <div class="contact-card-icon" aria-hidden="true">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+              </div>
+              <div class="contact-card-text">
+                <h4>Teléfono de Contacto</h4>
+                <p><a href="tel:+56912345678">+56 9 1234 5678</a></p>
+                <p><a href="tel:+56223456789">+56 2 2345 6789 (Mesa Central)</a></p>
+              </div>
+            </div>
+
+            <div class="contact-card">
+              <div class="contact-card-icon" aria-hidden="true">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+              </div>
+              <div class="contact-card-text">
+                <h4>Correo Electrónico</h4>
+                <p><a href="mailto:contacto@nietec.cl">contacto@nietec.cl</a></p>
+                <p><a href="mailto:licitaciones@nietec.cl">licitaciones@nietec.cl</a></p>
+              </div>
+            </div>
+
+            <div class="contact-card">
+              <div class="contact-card-icon" aria-hidden="true">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+              </div>
+              <div class="contact-card-text">
+                <h4>Casa Central y Operaciones</h4>
+                <p>Av. Parque Industrial 4500, Módulo B</p>
+                <p>Santiago, Chile</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Formulario de Contacto -->
+          <div class="contact-form-container">
+            <form id="contactForm" action="#" method="POST">
+              <div class="form-row">
+                <div class="form-group">
+                  <label for="nombre">Nombre Completo *</label>
+                  <input type="text" id="nombre" name="nombre" class="form-control" placeholder="Ej. Carlos Mendoza" required>
+                </div>
+                <div class="form-group">
+                  <label for="empresa">Empresa / Organización *</label>
+                  <input type="text" id="empresa" name="empresa" class="form-control" placeholder="Ej. Constructora Andina" required>
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label for="email">Correo Corporativo *</label>
+                <input type="email" id="email" name="email" class="form-control" placeholder="ejemplo@empresa.com" required>
+              </div>
+
+              <div class="form-group">
+                <label for="servicioInteres">Área de Interés</label>
+                <select id="servicioInteres" name="servicioInteres" class="form-control">
+                  <option value="ingenieria">Ingeniería y Proyectos</option>
+                  <option value="instalaciones">Instalaciones y Mantenimiento (HVAC/Electricidad)</option>
+                  <option value="obras">Obras y Estructuras Metálicas</option>
+                  <option value="facility">Mantenimiento Integral / Facility Management</option>
+                  <option value="equipos">Comercialización de Equipos e Insumos</option>
+                  <option value="licitacion">Licitación / Otro</option>
+                </select>
+              </div>
+
+              <div class="form-group">
+                <label for="mensaje">Descripción del Proyecto o Requerimiento *</label>
+                <textarea id="mensaje" name="mensaje" class="form-control" placeholder="Detalle ubicación, plazos estimados o especificaciones..." required></textarea>
+              </div>
+
+              <button type="submit" class="btn btn-primary" style="width: 100%;">Enviar Consulta de Cotización</button>
+
+              <div class="form-status" id="formStatus">
+                ¡Gracias por comunicarte con NIETEC! Tu solicitud ha sido recibida y nuestro equipo técnico se contactará en breve.
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- ==========================================================================
+       FOOTER
+       ========================================================================== -->
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-grid">
+        <!-- Columna 1: Marca y descripción -->
+        <div class="footer-brand">
+          <a href="#inicio" class="logo">
+            <span class="logo-badge" aria-hidden="true"></span>
+            NIETEC
+          </a>
+          <p>
+            Soluciones integrales de ingeniería, obras civiles, mantenimiento y suministro industrial. Seguridad, calidad y excelencia técnica en cada entrega.
+          </p>
+        </div>
+
+        <!-- Columna 2: Enlaces Rápidos -->
+        <div class="footer-links">
+          <h4>Navegación</h4>
+          <ul>
+            <li><a href="#inicio">Inicio</a></li>
+            <li><a href="#nosotros">Nosotros</a></li>
+            <li><a href="#servicios">Servicios</a></li>
+            <li><a href="#productos">Productos</a></li>
+            <li><a href="#contacto">Contacto</a></li>
+          </ul>
+        </div>
+
+        <!-- Columna 3: Redes y Presencia -->
+        <div class="footer-social">
+          <h4>Conéctate</h4>
+          <div class="social-links">
+            <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" class="social-icon" aria-label="LinkedIn">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
+            </a>
+            <a href="mailto:contacto@nietec.cl" class="social-icon" aria-label="Correo Directo">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+            </a>
+            <a href="#contacto" class="social-icon" aria-label="Ubicación">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Pie de copyright -->
+      <div class="footer-bottom">
+        <p>&copy; 2026 NIETEC. Todos los derechos reservados.</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ==========================================================================
+       SCRIPTS: MENÚ MÓVIL Y FEEDBACK DE CONTACTO
+       ========================================================================== -->
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      // Toggle de Navegación Móvil
+      const navToggle = document.getElementById('navToggle');
+      const navMenu = document.getElementById('navMenu');
+      const navLinks = document.querySelectorAll('.nav-link');
+
+      if (navToggle && navMenu) {
+        navToggle.addEventListener('click', () => {
+          const isOpen = navMenu.classList.toggle('is-active');
+          navToggle.setAttribute('aria-expanded', String(isOpen));
+        });
+
+        // Cerrar menú al hacer clic en un enlace
+        navLinks.forEach(link => {
+          link.addEventListener('click', () => {
+            navMenu.classList.remove('is-active');
+            navToggle.setAttribute('aria-expanded', 'false');
+          });
+        });
+      }
+
+      // Resaltado de sección activa en el menú al hacer scroll
+      const sections = document.querySelectorAll('section[id]');
+      window.addEventListener('scroll', () => {
+        const scrollY = window.pageYOffset;
+        sections.forEach(current => {
+          const sectionHeight = current.offsetHeight;
+          const sectionTop = current.offsetTop - 100;
+          const sectionId = current.getAttribute('id');
+          const correspondingLink = document.querySelector(`.nav-menu a[href*="${sectionId}"]`);
+
+          if (correspondingLink) {
+            if (scrollY > sectionTop && scrollY <= sectionTop + sectionHeight) {
+              correspondingLink.classList.add('active');
+            } else {
+              correspondingLink.classList.remove('active');
+            }
+          }
+        });
+      });
+
+      // Manejo del formulario de contacto
+      const contactForm = document.getElementById('contactForm');
+      const formStatus = document.getElementById('formStatus');
+
+      if (contactForm && formStatus) {
+        contactForm.addEventListener('submit', (e) => {
+          e.preventDefault();
+          formStatus.classList.add('success');
+          contactForm.reset();
+          setTimeout(() => {
+            formStatus.classList.remove('success');
+          }, 6000);
+        });
+      }
+    });
+  </script>
+</body>
+</html>
