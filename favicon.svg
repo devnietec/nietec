@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="160 190 450 450">
+  <title>NIETEC</title>
+  <rect x="160" y="190" width="450" height="450" rx="64" fill="#ffffff"/>
+  <g fill="#0f1c30">
+    <path d="M182 270L255 246L261 248V382L298 416V560L185 601L182 598Z"/>
+    <path d="M484 269L589 229V560L519 586V449L484 417Z"/>
+    <path fill="#f59e0b" d="M279 254L501 457V580L279 374Z"/>
+  </g>
+</svg>

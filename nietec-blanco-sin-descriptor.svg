@@ -1,0 +1,14 @@
+<?xml version='1.0' encoding='utf-8'?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="140 245 1510 340" role="img" aria-labelledby="title description" width="1510" height="340">
+  <title id="title">NIETEC — Logo blanco</title>
+  <desc id="description">Símbolo N estructural y nombre NIETEC en blanco. Fondo transparente. Trazados vectoriales sin dependencia de fuentes.</desc>
+  <g id="simbolo" fill="#ffffff" transform="matrix(.72 0 0 .72 50.96 116.2)"><path d="M182 270L255 246L261 248V382L298 416V560L185 601L182 598Z" />
+<path d="M484 269L589 229V560L519 586V449L484 417Z" />
+<path fill="#ffffff" d="M279 254L501 457V580L279 374Z" /></g>
+  <g id="nombre-NIETEC" fill="#ffffff" aria-label="NIETEC" transform="translate(-110 42)"><path d="M649 470V276H716L798 382V276H856V470H790L708 364V470Z" />
+<path d="M882 276H940V470H882Z" />
+<path d="M968 276H1128V324H1030V349H1116V394H1030V422H1128V470H968Z" />
+<path d="M1146 276H1325V324H1265V470H1206V324H1146Z" />
+<path d="M1347 276H1508V324H1408V349H1495V394H1408V422H1508V470H1347Z" />
+<path d="M1726 276H1632C1562 276 1527 308 1527 373C1527 438 1562 470 1632 470H1726V420H1634C1602 420 1587 406 1587 373C1587 341 1602 327 1634 327H1726Z" /></g>
+  </svg>
