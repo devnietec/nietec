@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="NIETEC - Soluciones integrales en ingeniería, mantenimiento industrial y comercial, obras civiles y comercialización de equipos.">
-  <title>NIETEC | Soluciones Integrales en Ingeniería, Mantenimiento y Construcción</title>
+  <meta name="description" content="NIETEC - Ingeniería y soluciones industriales. Electricidad, CCTV, gasfitería, obras civiles, refrigeración, climatización, aseo y equipamiento gastronómico.">
+  <title>NIETEC | Ingeniería y Soluciones Industriales</title>
   
   <!-- Tipografías Google Fonts: Montserrat (Titulares técnicos) + Inter (Cuerpo de texto) -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -22,6 +22,7 @@
       --color-primary-light: #1c2e4a;      /* Azul pizarra técnico */
       --color-primary-accent: #253d64;     /* Acento azul metálico */
       --color-accent: #f59e0b;             /* Amarillo/Naranja de seguridad industrial */
+      --color-accent-text: #b45309;        /* Ámbar de alto contraste (≥4.5:1) para texto en fondo claro */
       --color-accent-hover: #d97706;       /* Hover acento seguridad */
       --color-success: #10b981;            /* Verde de operación activa */
       --color-text-main: #1e293b;          /* Gris oscuro grafito */
@@ -44,8 +45,8 @@
       --radius-md: 8px;
       --radius-lg: 14px;
       --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.06);
-      --shadow-md: 0 8px 24px -4px rgba(15, 28, 48, 0.1);
-      --shadow-lg: 0 20px 40px -8px rgba(15, 28, 48, 0.2);
+      --shadow-md: 0 8px 24px -4px rgba(0, 0, 0, 0.12);
+      --shadow-lg: 0 20px 40px -8px rgba(0, 0, 0, 0.22);
     }
 
     /* ==========================================================================
@@ -73,12 +74,39 @@
     h1, h2, h3, h4, .brand-font {
       font-family: var(--font-display);
       letter-spacing: -0.02em;
+      overflow-wrap: anywhere;
     }
 
     a {
       color: inherit;
       text-decoration: none;
       transition: all var(--transition-smooth);
+    }
+
+    /* Accesibilidad: foco visible consistente para navegación por teclado (WCAG 2.4.7) */
+    :focus-visible {
+      outline: 2px solid var(--color-accent);
+      outline-offset: 3px;
+    }
+
+    .skip-link {
+      position: fixed;
+      top: 0.5rem;
+      left: 1rem;
+      z-index: 1100;
+      padding: 0.875rem 1rem;
+      background-color: var(--color-accent);
+      color: var(--color-primary-dark);
+      font-weight: 700;
+      transform: translateY(-200%);
+    }
+
+    .skip-link:focus {
+      transform: translateY(0);
+    }
+
+    #inicio {
+      scroll-margin-top: 100px;
     }
 
     ul {
@@ -104,27 +132,6 @@
       text-align: center;
       max-width: 760px;
       margin: 0 auto 3.5rem;
-    }
-
-    .section-eyebrow {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.5rem;
-      font-size: 0.8125rem;
-      font-weight: 700;
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-      color: var(--color-accent);
-      margin-bottom: 0.75rem;
-    }
-
-    .section-eyebrow::before,
-    .section-eyebrow::after {
-      content: '';
-      display: inline-block;
-      width: 16px;
-      height: 2px;
-      background-color: var(--color-accent);
     }
 
     .section-title {
@@ -171,7 +178,7 @@
       background-color: var(--color-accent-hover);
       border-color: var(--color-accent-hover);
       transform: translateY(-2px);
-      box-shadow: 0 8px 20px rgba(245, 158, 11, 0.35);
+      box-shadow: 0 4px 14px rgba(0, 0, 0, 0.16);
     }
 
     .btn-secondary {
@@ -209,16 +216,23 @@
 
     .top-bar-item {
       display: inline-flex;
+      min-width: 0;
       align-items: center;
       gap: 0.4rem;
     }
 
     .top-bar-item svg {
       color: var(--color-accent);
+      flex-shrink: 0;
+    }
+
+    .top-bar-item > span {
+      min-width: 0;
     }
 
     .top-bar-links {
       display: flex;
+      flex-wrap: wrap;
       align-items: center;
       gap: 1.25rem;
     }
@@ -266,11 +280,14 @@
     .nav-toggle {
       display: flex;
       flex-direction: column;
+      justify-content: center;
       gap: 5px;
       background: none;
       border: none;
       cursor: pointer;
-      padding: 0.5rem;
+      padding: 0.625rem;
+      min-width: 44px;
+      min-height: 44px;
     }
 
     .nav-toggle span {
@@ -355,67 +372,19 @@
       overflow: hidden;
     }
 
-    /* Cuadrícula milimétrica sutil (Blueprint texture) */
-    .hero::before {
-      content: '';
-      position: absolute;
-      inset: 0;
-      background-image: 
-        linear-gradient(rgba(255, 255, 255, 0.025) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(255, 255, 255, 0.025) 1px, transparent 1px);
-      background-size: 40px 40px;
-      pointer-events: none;
-    }
-
     .hero-content {
       position: relative;
       z-index: 2;
       max-width: 820px;
     }
 
-    /* Badge con pulso de estado operativo */
-    .status-badge {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.65rem;
-      background-color: rgba(16, 185, 129, 0.1);
-      border: 1px solid rgba(16, 185, 129, 0.35);
-      padding: 0.45rem 1rem;
-      border-radius: 50px;
-      font-size: 0.825rem;
-      font-weight: 600;
-      color: #34d399;
-      margin-bottom: 1.75rem;
-    }
-
-    .pulse-dot {
-      width: 9px;
-      height: 9px;
-      background-color: var(--color-success);
-      border-radius: 50%;
-      box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.7);
-      animation: pulseAnimation 2s infinite;
-    }
-
-    @keyframes pulseAnimation {
-      0% {
-        box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.7);
-      }
-      70% {
-        box-shadow: 0 0 0 10px rgba(16, 185, 129, 0);
-      }
-      100% {
-        box-shadow: 0 0 0 0 rgba(16, 185, 129, 0);
-      }
-    }
-
     .hero-title {
       font-size: 2.5rem;
       font-weight: 900;
-      line-height: 1.12;
+      line-height: 1.15;
       margin-bottom: 1.5rem;
       color: var(--color-white);
-      text-transform: uppercase;
+      letter-spacing: -0.02em;
     }
 
     .hero-subtitle {
@@ -433,47 +402,29 @@
       margin-bottom: 3.5rem;
     }
 
-    /* Franja de Métricas Técnicas */
-    .hero-metrics {
+    .hero-strengths {
       display: grid;
-      grid-template-columns: repeat(2, 1fr);
+      grid-template-columns: repeat(2, minmax(0, 1fr));
       gap: 1.5rem;
       border-top: 1px solid var(--color-border-dark);
       padding-top: 2rem;
     }
 
-    .metric-card {
-      border-left: 2px solid var(--color-accent);
-      padding-left: 1rem;
-    }
-
-    .metric-number {
-      font-family: var(--font-display);
-      font-size: 2rem;
-      font-weight: 800;
+    .hero-strengths h2 {
+      font-size: 1rem;
+      font-weight: 700;
       color: var(--color-white);
-      line-height: 1.1;
-      margin-bottom: 0.25rem;
-    }
-
-    .metric-number span {
-      color: var(--color-accent);
-    }
-
-    .metric-label {
-      font-size: 0.825rem;
-      color: rgba(255, 255, 255, 0.7);
-      text-transform: uppercase;
-      letter-spacing: 0.05em;
+      line-height: 1.5;
     }
 
     /* ==========================================================================
        5. FRANJA DE SECTORES ESTRATÉGICOS (SOCIAL PROOF INDUSTRIAL)
        ========================================================================== */
     .sectors-bar {
-      background-color: #0b1325;
+      background-color: var(--color-primary-light);
       padding: 2.25rem 0;
-      border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+      border-top: 1px solid var(--color-border-dark);
+      border-bottom: 1px solid var(--color-border-dark);
     }
 
     .sectors-heading {
@@ -482,13 +433,13 @@
       font-weight: 700;
       letter-spacing: 0.15em;
       text-transform: uppercase;
-      color: rgba(255, 255, 255, 0.5);
+      color: rgba(255, 255, 255, 0.75);
       margin-bottom: 1.5rem;
     }
 
     .sectors-grid {
       display: grid;
-      grid-template-columns: repeat(2, 1fr);
+      grid-template-columns: repeat(auto-fit, minmax(min(100%, 180px), 1fr));
       gap: 1rem;
     }
 
@@ -510,11 +461,6 @@
       background-color: rgba(255, 255, 255, 0.08);
       border-color: var(--color-accent);
       color: var(--color-white);
-    }
-
-    .sector-item svg {
-      color: var(--color-accent);
-      flex-shrink: 0;
     }
 
     /* ==========================================================================
@@ -553,7 +499,7 @@
       padding: 1.25rem;
       background-color: var(--color-bg-light);
       border-radius: var(--radius-sm);
-      border-left: 4px solid var(--color-primary);
+      border: 1px solid var(--color-border);
     }
 
     .compliance-card-icon {
@@ -561,7 +507,7 @@
       margin-top: 0.15rem;
     }
 
-    .compliance-card h4 {
+    .compliance-card h3 {
       font-size: 1rem;
       font-weight: 700;
       color: var(--color-primary);
@@ -581,7 +527,6 @@
       padding: 2.75rem 2rem;
       border-radius: var(--radius-md);
       box-shadow: var(--shadow-lg);
-      border-top: 4px solid var(--color-accent);
       position: relative;
     }
 
@@ -639,61 +584,10 @@
       position: relative;
     }
 
-    /* Barra superior de acento con expansión en hover */
-    .service-card::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: 0;
-      right: 0;
-      height: 3px;
-      background-color: var(--color-accent);
-      transform: scaleX(0);
-      transform-origin: left;
-      transition: transform var(--transition-smooth);
-      z-index: 10;
-    }
-
     .service-card:hover {
       transform: translateY(-8px);
       box-shadow: var(--shadow-lg);
-      border-color: rgba(245, 158, 11, 0.4);
-    }
-
-    .service-card:hover::before {
-      transform: scaleX(1);
-    }
-
-    .service-image-header {
-      height: 190px;
-      position: relative;
-      overflow: hidden;
-      background-color: var(--color-primary-light);
-    }
-
-    .service-image-header img {
-      transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
-    }
-
-    .service-card:hover .service-image-header img {
-      transform: scale(1.08);
-    }
-
-    .service-badge-icon {
-      position: absolute;
-      bottom: -22px;
-      left: 1.75rem;
-      width: 48px;
-      height: 48px;
-      background-color: var(--color-primary);
-      border: 2px solid var(--color-accent);
-      border-radius: var(--radius-sm);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      color: var(--color-accent);
-      box-shadow: var(--shadow-md);
-      z-index: 5;
+      border-color: var(--color-primary-accent);
     }
 
     .service-body {
@@ -710,34 +604,67 @@
       margin-bottom: 0.75rem;
     }
 
-    .service-body p {
+    .service-body ul, .product-spec-card ul {
+      list-style: disc;
+      padding-inline-start: 1.25rem;
       font-size: 0.925rem;
-      color: var(--color-text-muted);
       line-height: 1.65;
-      margin-bottom: 1.5rem;
+      overflow-wrap: anywhere;
     }
 
-    .service-tags {
-      margin-top: auto;
+    .service-body ul {
+      color: var(--color-text-muted);
+    }
+
+    .product-spec-card ul {
+      color: rgba(255, 255, 255, 0.8);
+    }
+
+    .service-body li + li, .product-spec-card li + li {
+      margin-top: 0.4rem;
+    }
+
+    .brands {
+      padding: var(--section-spacing);
+      background-color: var(--color-white);
+      border-bottom: 1px solid var(--color-border);
+      scroll-margin-top: 100px;
+    }
+
+    .brands-content {
       display: flex;
       flex-wrap: wrap;
-      gap: 0.45rem;
-      padding-top: 1rem;
-      border-top: 1px dashed var(--color-border);
+      align-items: center;
+      justify-content: space-between;
+      gap: 2rem;
     }
 
-    .service-tag {
-      font-size: 0.775rem;
-      background-color: #f1f5f9;
-      color: var(--color-primary);
-      padding: 0.25rem 0.65rem;
-      border-radius: 3px;
-      font-weight: 600;
-      border: 1px solid #e2e8f0;
+    .brands-copy {
+      max-width: 36rem;
+    }
+
+    .brands-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1.5rem;
+    }
+
+    .brands-list li {
+      min-width: 0;
+      max-width: 100%;
+      padding: 0.75rem 1.5rem;
+      border-block: 3px solid var(--color-accent);
+    }
+
+    .brands-list img {
+      width: 204px;
+      max-width: 100%;
+      height: 76px;
+      object-fit: contain;
     }
 
     /* ==========================================================================
-       8. SECCIÓN COMERCIALIZACIÓN & SUMINISTRO INDUSTRIAL
+       8. EQUIPAMIENTO GASTRONÓMICO INDUSTRIAL
        ========================================================================== */
     .products {
       padding: var(--section-spacing);
@@ -806,21 +733,10 @@
       transform: translateY(-4px);
     }
 
-    .product-spec-card-icon {
-      color: var(--color-accent);
-      margin-bottom: 1rem;
-    }
-
-    .product-spec-card h4 {
+    .product-spec-card h3 {
       font-size: 1.15rem;
       color: var(--color-white);
       margin-bottom: 0.5rem;
-    }
-
-    .product-spec-card p {
-      font-size: 0.9rem;
-      color: rgba(255, 255, 255, 0.7);
-      line-height: 1.6;
     }
 
     /* ==========================================================================
@@ -862,7 +778,7 @@
     .channel-icon {
       background-color: #fffbeb;
       border: 1px solid #fef3c7;
-      color: var(--color-accent-hover);
+      color: var(--color-accent-text);
       width: 48px;
       height: 48px;
       border-radius: var(--radius-sm);
@@ -872,11 +788,16 @@
       flex-shrink: 0;
     }
 
-    .channel-body h4 {
+    .channel-body h3 {
       font-size: 1rem;
       font-weight: 700;
       color: var(--color-primary);
       margin-bottom: 0.25rem;
+    }
+
+    .channel-body {
+      min-width: 0;
+      overflow-wrap: anywhere;
     }
 
     .channel-body p, .channel-body a {
@@ -889,6 +810,7 @@
     }
 
     .contact-form-card {
+      min-width: 0;
       background-color: var(--color-bg-card);
       border: 1px solid var(--color-border);
       border-radius: var(--radius-md);
@@ -897,6 +819,7 @@
     }
 
     .form-group {
+      min-width: 0;
       margin-bottom: 1.5rem;
     }
 
@@ -912,9 +835,10 @@
 
     .form-control {
       width: 100%;
+      min-width: 0;
       padding: 0.85rem 1rem;
       font-family: inherit;
-      font-size: 0.95rem;
+      font-size: 1rem;
       color: var(--color-text-main);
       background-color: #fafbfc;
       border: 1.5px solid var(--color-border);
@@ -926,12 +850,20 @@
     .form-control:focus {
       background-color: var(--color-white);
       border-color: var(--color-primary);
-      box-shadow: 0 0 0 4px rgba(15, 28, 48, 0.08);
+      box-shadow: 0 0 0 3px rgba(0, 0, 0, 0.08);
     }
 
     textarea.form-control {
       resize: vertical;
       min-height: 120px;
+    }
+
+    .form-hint {
+      display: block;
+      margin-top: 0.5rem;
+      font-size: 0.875rem;
+      overflow-wrap: anywhere;
+      color: var(--color-text-muted);
     }
 
     /* Selector interactivo tipo Chips / Pills */
@@ -942,6 +874,8 @@
     }
 
     .service-pill {
+      max-width: 100%;
+      min-height: 44px;
       font-size: 0.85rem;
       font-weight: 600;
       padding: 0.5rem 0.85rem;
@@ -962,24 +896,7 @@
       background-color: var(--color-primary);
       color: var(--color-white);
       border-color: var(--color-primary);
-      box-shadow: 0 2px 8px rgba(15, 28, 48, 0.2);
-    }
-
-    .form-alert {
-      display: none;
-      margin-top: 1.25rem;
-      padding: 1rem;
-      border-radius: var(--radius-sm);
-      font-size: 0.925rem;
-      text-align: center;
-      font-weight: 600;
-    }
-
-    .form-alert.success {
-      display: block;
-      background-color: #ecfdf5;
-      color: #065f46;
-      border: 1px solid #a7f3d0;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.16);
     }
 
     /* ==========================================================================
@@ -1040,8 +957,8 @@
     }
 
     .social-btn {
-      width: 40px;
-      height: 40px;
+      min-width: 44px;
+      min-height: 44px;
       background-color: rgba(255, 255, 255, 0.06);
       border: 1px solid rgba(255, 255, 255, 0.1);
       border-radius: var(--radius-sm);
@@ -1074,6 +991,16 @@
     /* ==========================================================================
        11. MEDIA QUERIES (DESKTOP & TABLET ADAPTATION)
        ========================================================================== */
+    @media (max-width: 767px) {
+      :root {
+        --section-spacing: 3.5rem 0;
+      }
+
+      .contact-form-card, .products-panel {
+        padding: 1.5rem 1.25rem;
+      }
+    }
+
     @media (min-width: 768px) {
       .section-title {
         font-size: 2.5rem;
@@ -1083,11 +1010,7 @@
         font-size: 3.5rem;
       }
 
-      .hero-metrics {
-        grid-template-columns: repeat(4, 1fr);
-      }
-
-      .sectors-grid {
+      .hero-strengths {
         grid-template-columns: repeat(4, 1fr);
       }
 
@@ -1104,11 +1027,11 @@
       }
 
       .products-grid {
-        grid-template-columns: repeat(3, 1fr);
+        grid-template-columns: repeat(2, minmax(0, 1fr));
       }
 
       .contact-wrapper {
-        grid-template-columns: 1fr 1.3fr;
+        grid-template-columns: minmax(0, 1fr) minmax(0, 1.3fr);
       }
 
       .form-row {
@@ -1140,7 +1063,7 @@
         background: transparent;
         border: none;
         padding: 0;
-        gap: 2.25rem;
+        gap: clamp(1rem, 2vw, 2.25rem);
       }
 
       .nav-cta-btn {
@@ -1150,33 +1073,47 @@
       }
 
       .services-grid {
-        grid-template-columns: repeat(4, 1fr);
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+      }
+
+      .products-grid {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+      }
+    }
+
+    /* Accesibilidad: Respeto a preferencias de movimiento reducido (WCAG 2.3.3) */
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
       }
     }
   </style>
 </head>
 <body>
+  <a href="#inicio" class="skip-link">Saltar al contenido</a>
 
   <!-- ==========================================================================
-       TOP-BAR INDUSTRIAL (UTILIDADES & ATENCIÓN 24/7)
+       TOP-BAR INDUSTRIAL (CONTACTO OFICIAL)
        ========================================================================== -->
   <aside class="top-bar">
     <div class="container">
       <div class="top-bar-inner">
         <div class="top-bar-item">
           <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
-          <span>Mesa Central & Soporte en Faena: <strong>+56 2 2345 6789</strong></span>
+          <span>Contacto: <a href="tel:+56949856518"><strong>+56 9 4985 6518</strong></a></span>
         </div>
 
         <div class="top-bar-links">
-          <a href="mailto:licitaciones@nietec.cl" class="top-bar-item top-bar-link">
+          <a href="mailto:nietecspa@gmail.com" class="top-bar-item top-bar-link">
             <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
-            <span>licitaciones@nietec.cl</span>
+            <span>nietecspa@gmail.com</span>
           </a>
-          <span style="opacity: 0.3;">|</span>
           <span class="top-bar-item">
             <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 0-20"/><path d="M2 12h20"/></svg>
-            <span>Cobertura Nacional (Chile)</span>
+            <a href="https://www.nietec.cl">www.nietec.cl</a>
           </span>
         </div>
       </div>
@@ -1206,7 +1143,8 @@
           <li><a href="#inicio" class="nav-link active">Inicio</a></li>
           <li><a href="#nosotros" class="nav-link">Nosotros</a></li>
           <li><a href="#servicios" class="nav-link">Servicios</a></li>
-          <li><a href="#productos" class="nav-link">Productos</a></li>
+          <li><a href="#marcas" class="nav-link">Marcas</a></li>
+          <li><a href="#productos" class="nav-link">Gastronomía</a></li>
           <li><a href="#contacto" class="nav-link">Contacto</a></li>
         </ul>
 
@@ -1220,43 +1158,24 @@
     <!-- ==========================================================================
          HERO SECTION (INICIO INDUSTRIAL)
          ========================================================================== -->
-    <section class="hero" id="inicio">
+    <section class="hero" id="inicio" tabindex="-1">
       <div class="container">
         <div class="hero-content">
-          <!-- Indicador en vivo de estado operativo -->
-          <div class="status-badge">
-            <span class="pulse-dot" aria-hidden="true"></span>
-            Disponibilidad operativa para licitaciones y proyectos 2026
-          </div>
-
-          <h1 class="hero-title">Soluciones Integrales en Ingeniería, Mantenimiento y Construcción</h1>
+          <h1 class="hero-title">Ingeniería y soluciones industriales</h1>
           <p class="hero-subtitle">
-            Acompañamos a su empresa con ejecución de alta precisión técnica, cumplimiento normativo riguroso y gestión llave en mano diseñada para maximizar la continuidad operativa de su infraestructura.
+            Desarrollamos, ejecutamos y mantenemos proyectos y servicios técnicos para clientes residenciales, comerciales e industriales.
           </p>
 
           <div class="hero-actions">
-            <a href="#contacto" class="btn btn-primary">Cotiza tu Proyecto</a>
+            <a href="#contacto" class="btn btn-primary">Cotizar Proyecto</a>
             <a href="#servicios" class="btn btn-secondary">Ver Especialidades</a>
           </div>
 
-          <!-- Métricas Técnicas Cuantificables -->
-          <div class="hero-metrics">
-            <div class="metric-card">
-              <div class="metric-number">100<span>%</span></div>
-              <div class="metric-label">Plazos Cumplidos</div>
-            </div>
-            <div class="metric-card">
-              <div class="metric-number">24<span>/7</span></div>
-              <div class="metric-label">Respuesta en Faena</div>
-            </div>
-            <div class="metric-card">
-              <div class="metric-number">+15<span>Años</span></div>
-              <div class="metric-label">Experiencia Técnica</div>
-            </div>
-            <div class="metric-card">
-              <div class="metric-number">0<span>CTP</span></div>
-              <div class="metric-label">Seguridad Cero Daño</div>
-            </div>
+          <div class="hero-strengths" aria-label="Nuestro enfoque">
+            <h2>Experiencia técnica</h2>
+            <h2>Calidad y seguridad</h2>
+            <h2>Soluciones a tu medida</h2>
+            <h2>Servicio integral</h2>
           </div>
         </div>
       </div>
@@ -1267,24 +1186,13 @@
          ========================================================================== -->
     <section class="sectors-bar" aria-label="Sectores atendidos">
       <div class="container">
-        <p class="sectors-heading">Sectores Industriales y Comerciales con Capacidad Operativa Directa</p>
+        <p class="sectors-heading">Trabajamos en diversos sectores</p>
         <div class="sectors-grid">
-          <div class="sector-item">
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg>
-            <span>Minería y Energía</span>
-          </div>
-          <div class="sector-item">
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="1" y="3" width="15" height="13"/><polygon points="16 8 20 8 23 11 23 16 16 16 16 8"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg>
-            <span>Centros Logísticos</span>
-          </div>
-          <div class="sector-item">
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 21h18"/><path d="M9 8h1"/><path d="M9 12h1"/><path d="M9 16h1"/><path d="M14 8h1"/><path d="M14 12h1"/><path d="M14 16h1"/><path d="M5 21V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2v16"/></svg>
-            <span>Hotelería y Retail</span>
-          </div>
-          <div class="sector-item">
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg>
-            <span>Plantas Industriales</span>
-          </div>
+          <div class="sector-item">Industria</div>
+          <div class="sector-item">Empresas</div>
+          <div class="sector-item">Comercio</div>
+          <div class="sector-item">Residencial</div>
+          <div class="sector-item">Instituciones</div>
         </div>
       </div>
     </section>
@@ -1295,20 +1203,19 @@
     <section class="about" id="nosotros">
       <div class="container">
         <div class="section-header">
-          <span class="section-eyebrow">Sobre NIETEC</span>
-          <h2 class="section-title">Solidez Operativa y Capacidad Técnica Multidisciplinaria</h2>
+          <h2 class="section-title">Soluciones integrales para tus proyectos</h2>
           <p class="section-desc">
-            Gestionamos requerimientos de alta exigencia combinando experiencia de campo, rigor normativo y capacidad de respuesta inmediata.
+            Experiencia técnica, calidad y seguridad, soluciones a tu medida y servicio integral.
           </p>
         </div>
 
         <div class="about-layout">
           <div class="about-text">
             <p>
-              <strong>NIETEC</strong> es una empresa integral especializada en la gestión, desarrollo y ejecución de proyectos de ingeniería, obras civiles, mantenimiento preventivo-correctivo y suministro técnico especializado.
+              <strong>NIETEC</strong> desarrolla, ejecuta y mantiene proyectos y servicios técnicos para clientes residenciales, comerciales e industriales.
             </p>
             <p>
-              Nuestra estructura técnica y financiera nos permite participar activamente en licitaciones públicas y privadas, garantizando soluciones llave en mano adaptadas a faenas industriales, complejos hoteleros, redes comerciales y plantas productivas.
+              Nuestras especialidades abarcan electricidad, redes y sistemas de CCTV, gasfitería, equipamiento gastronómico, obras civiles, refrigeración y climatización, limpieza de desagües y alcantarillados y aseo industrial.
             </p>
 
             <div class="compliance-badges">
@@ -1317,8 +1224,8 @@
                   <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
                 </div>
                 <div>
-                  <h4>Seguridad & Prevención</h4>
-                  <p>Protocolos cero daño y estricto apego a normativas de prevención de riesgos ocupacionales.</p>
+                  <h3>Calidad y seguridad</h3>
+                  <p>Calidad y seguridad en nuestros proyectos y servicios técnicos.</p>
                 </div>
               </div>
 
@@ -1327,31 +1234,31 @@
                   <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
                 </div>
                 <div>
-                  <h4>Continuidad Operativa</h4>
-                  <p>Mantenimiento programado para evitar paradas críticas no planificadas en sus instalaciones.</p>
+                  <h3>Servicio integral</h3>
+                  <p>Desarrollo, ejecución y mantenimiento de proyectos según tu requerimiento.</p>
                 </div>
               </div>
             </div>
           </div>
 
           <div class="about-card-industrial">
-            <h3>Por qué confiar en NIETEC</h3>
+            <h3>Atención para distintos espacios</h3>
             <ul>
               <li>
                 <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg>
-                <span>Habilitados para licitaciones públicas (Mercado Público) y contratos privados corporativos.</span>
+                <span>Industria, empresas, comercio, clientes residenciales e instituciones.</span>
               </li>
               <li>
                 <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg>
-                <span>Soluciones llave en mano: desde ingeniería conceptual hasta puesta en marcha definitiva.</span>
+                <span>Restaurantes, casinos, hoteles y cocinas industriales.</span>
               </li>
               <li>
                 <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg>
-                <span>Equipo de ingenieros y técnicos residentes certificados por especialidad.</span>
+                <span>Reparación, mantenimiento, automatización y mejoras de equipamiento gastronómico.</span>
               </li>
               <li>
                 <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg>
-                <span>Trazabilidad documental, libro de obras digital y garantías formales en cada entrega.</span>
+                <span>Soluciones a tu medida para proyectos y servicios técnicos.</span>
               </li>
             </ul>
           </div>
@@ -1360,151 +1267,259 @@
     </section>
 
     <!-- ==========================================================================
-         SECCIÓN SERVICIOS (TARJETAS TÉCNICAS CON CABECERA FOTOGRÁFICA)
+         ESPECIALIDADES GENERALES
          ========================================================================== -->
     <section class="services" id="servicios">
       <div class="container">
         <div class="section-header">
-          <span class="section-eyebrow">Capacidades Técnicas</span>
-          <h2 class="section-title">Nuestras Divisiones de Servicio</h2>
-          <p class="section-desc">
-            Agrupamos nuestra experiencia técnica en cuatro divisiones estratégicas para brindar cobertura completa a las demandas de su infraestructura.
-          </p>
+          <h2 class="section-title">Nuestras especialidades</h2>
+          <p class="section-desc">Proyectos y servicios técnicos para clientes residenciales, comerciales e industriales.</p>
         </div>
-
         <div class="services-grid">
-          <!-- Tarjeta 1: Ingeniería y Proyectos -->
           <article class="service-card">
-            <div class="service-image-header">
-              <img src="https://images.unsplash.com/photo-1503387762-592deb58ef4e?auto=format&fit=crop&w=700&q=80" alt="Ingeniería y Proyectos" loading="lazy">
-              <div class="service-badge-icon" aria-hidden="true">
-                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>
-              </div>
-            </div>
             <div class="service-body">
-              <h3>Ingeniería y Proyectos</h3>
-              <p>
-                Desarrollo desde etapa conceptual hasta expediente definitivo. Consultoría estratégica, cubicación, modelado y supervisión técnica en terreno.
-              </p>
-              <div class="service-tags">
-                <span class="service-tag">Diseño</span>
-                <span class="service-tag">Gestión</span>
-                <span class="service-tag">Consultoría</span>
-                <span class="service-tag">Licitaciones</span>
-              </div>
+              <h3>Electricidad</h3>
+              <ul>
+                <li>Proyectos e instalaciones</li>
+                <li>Tableros y protecciones</li>
+                <li>Iluminación</li>
+                <li>Mediciones y diagnóstico</li>
+                <li>Regularizaciones e informes</li>
+              </ul>
             </div>
           </article>
 
-          <!-- Tarjeta 2: Instalaciones y Mantenimiento -->
           <article class="service-card">
-            <div class="service-image-header">
-              <img src="https://images.unsplash.com/photo-1621905251189-08b45d6a269e?auto=format&fit=crop&w=700&q=80" alt="Instalaciones HVAC y Eléctricas" loading="lazy">
-              <div class="service-badge-icon" aria-hidden="true">
-                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>
-              </div>
-            </div>
             <div class="service-body">
-              <h3>Instalaciones & Redes</h3>
-              <p>
-                Montaje y conservación de redes críticas: climatización industrial (HVAC), tableros eléctricos certificados, redes hidrosanitarias y CCTV.
-              </p>
-              <div class="service-tags">
-                <span class="service-tag">HVAC Industrial</span>
-                <span class="service-tag">Electricidad BT/MT</span>
-                <span class="service-tag">Sanitarias</span>
-                <span class="service-tag">Telecom / CCTV</span>
-              </div>
+              <h3>Redes y sistemas de CCTV</h3>
+              <ul>
+                <li>Cableado estructurado</li>
+                <li>Redes de datos y fibra óptica</li>
+                <li>CCTV IP y análogo</li>
+                <li>Control de acceso</li>
+                <li>Mantención y soporte</li>
+              </ul>
             </div>
           </article>
 
-          <!-- Tarjeta 3: Obras y Estructuras -->
           <article class="service-card">
-            <div class="service-image-header">
-              <img src="https://images.unsplash.com/photo-1504307651254-35680f356dfd?auto=format&fit=crop&w=700&q=80" alt="Obras Civiles y Estructuras de Acero" loading="lazy">
-              <div class="service-badge-icon" aria-hidden="true">
-                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18"/><path d="M9 21V9"/></svg>
-              </div>
-            </div>
             <div class="service-body">
-              <h3>Obras & Estructuras</h3>
-              <p>
-                Fabricación y montaje de estructuras de acero, soldadura calificada según norma AWS, obras civiles menores, pavimentos y remodelaciones.
-              </p>
-              <div class="service-tags">
-                <span class="service-tag">Estructuras Acero</span>
-                <span class="service-tag">Soldadura AWS</span>
-                <span class="service-tag">Obras Civiles</span>
-                <span class="service-tag">Pavimentos</span>
-              </div>
+              <h3>Gasfitería</h3>
+              <ul>
+                <li>Instalaciones sanitarias</li>
+                <li>Reparaciones y mantenciones</li>
+                <li>Detección y solución de fugas</li>
+                <li>Montaje de artefactos</li>
+                <li>Redes de agua y desagüe</li>
+              </ul>
             </div>
           </article>
 
-          <!-- Tarjeta 4: Mantenimiento Integral -->
           <article class="service-card">
-            <div class="service-image-header">
-              <img src="https://images.unsplash.com/photo-1581094794329-c8112a89af12?auto=format&fit=crop&w=700&q=80" alt="Facility Management y Mantenimiento" loading="lazy">
-              <div class="service-badge-icon" aria-hidden="true">
-                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg>
-              </div>
-            </div>
             <div class="service-body">
-              <h3>Mantenimiento Integral</h3>
-              <p>
-                Facility management para plantas productivas, cadenas comerciales y hoteles. Planes preventivos con monitoreo riguroso de KPIs.
-              </p>
-              <div class="service-tags">
-                <span class="service-tag">Facility Mgt</span>
-                <span class="service-tag">Hotelería</span>
-                <span class="service-tag">Industria</span>
-                <span class="service-tag">Turnos 24/7</span>
-              </div>
+              <h3>Reparación de equipamiento gastronómico</h3>
+              <ul>
+                <li>Cocinas industriales</li>
+                <li>Hornos y freidoras</li>
+                <li>Refrigeradores y congeladores</li>
+                <li>Máquinas de hielo y lavavajillas</li>
+                <li>Mantención y servicio técnico</li>
+              </ul>
+            </div>
+          </article>
+
+          <article class="service-card">
+            <div class="service-body">
+              <h3>Obras civiles</h3>
+              <ul>
+                <li>Obras menores y terminaciones</li>
+                <li>Adecuaciones de infraestructura</li>
+                <li>Pavimentos y radieres</li>
+                <li>Canalizaciones y obras de apoyo</li>
+                <li>Trabajos complementarios</li>
+              </ul>
+            </div>
+          </article>
+
+          <article class="service-card">
+            <div class="service-body">
+              <h3>Refrigeración y climatización</h3>
+              <ul>
+                <li>Instalación y mantención</li>
+                <li>Equipos split y VRF</li>
+                <li>Cámaras de frío</li>
+                <li>Ventilación y climatización</li>
+                <li>Diagnóstico y soporte técnico</li>
+              </ul>
+            </div>
+          </article>
+
+          <article class="service-card">
+            <div class="service-body">
+              <h3>Limpieza de desagües y alcantarillados</h3>
+              <ul>
+                <li>Extracción de aguas servidas</li>
+                <li>Limpieza de cámaras</li>
+                <li>Destape y limpieza de tuberías</li>
+                <li>Succión de aguas residuales</li>
+                <li>Mantención de sistemas de alcantarillado</li>
+              </ul>
+            </div>
+          </article>
+
+          <article class="service-card">
+            <div class="service-body">
+              <h3>Aseo industrial</h3>
+              <ul>
+                <li>Limpieza de cocinas industriales</li>
+                <li>Lavado de alfombras y tapices</li>
+                <li>Limpieza de pisos y superficies</li>
+                <li>Higienización de espacios</li>
+                <li>Mantención general</li>
+              </ul>
             </div>
           </article>
         </div>
       </div>
     </section>
 
+    <section class="brands" id="marcas" aria-labelledby="marcasTitle">
+      <div class="container brands-content">
+        <div class="brands-copy">
+          <h2 class="section-title" id="marcasTitle">Marcas con las que trabajamos</h2>
+          <p class="section-desc">Herramientas que utilizamos en nuestros proyectos y servicios técnicos.</p>
+        </div>
+        <ul class="brands-list" aria-label="Marcas de herramientas utilizadas">
+          <li><img src="DeWalt_Logo.svg" alt="DEWALT" width="957" height="343" loading="lazy"></li>
+          <li><img src="Bahco_logo.svg" alt="BAHCO" width="194" height="86" loading="lazy"></li>
+          <li><img src="footer_quality.gif" alt="PROVIDUS Plus" width="204" height="45" loading="lazy"></li>
+        </ul>
+      </div>
+    </section>
+
     <!-- ==========================================================================
-         SECCIÓN COMERCIALIZACIÓN (SUMINISTRO DE EQUIPOS)
+         EQUIPAMIENTO GASTRONÓMICO INDUSTRIAL
          ========================================================================== -->
     <section class="products" id="productos">
       <div class="container">
         <div class="products-panel">
           <div class="products-header">
-            <span class="section-eyebrow" style="color: var(--color-accent);">División Suministro</span>
-            <h2>Comercialización Directa de Equipos e Insumos Industriales</h2>
-            <p>
-              Garantizamos el aprovisionamiento de herramientas, maquinarias y consumibles de estándar industrial. Logística integrada con despacho a faena en todo el territorio nacional.
-            </p>
+            <h2>Equipamiento gastronómico industrial</h2>
+            <p>Reparación, mantenimiento, automatización y mejoras para cocinas profesionales e instalaciones gastronómicas. Soluciones para restaurantes, casinos, hoteles y cocinas industriales.</p>
           </div>
-
           <div class="products-grid">
-            <div class="product-spec-card">
-              <div class="product-spec-card-icon" aria-hidden="true">
-                <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg>
-              </div>
-              <h4>Herramientas de Precisión</h4>
-              <p>Instrumental de torque, medición certificada, herramientas neumáticas y bancos de trabajo para taller pesado.</p>
-            </div>
+            <article class="product-spec-card">
+              <h3>Hornos industriales</h3>
+              <ul>
+                <li>Reparación de quemadores</li>
+                <li>Cambio de termostatos</li>
+                <li>Calibración de temperatura</li>
+                <li>Lectura digital de parámetros</li>
+                <li>Diagnóstico e implementación automatizada</li>
+                <li>Importación de repuestos</li>
+              </ul>
+            </article>
 
-            <div class="product-spec-card">
-              <div class="product-spec-card-icon" aria-hidden="true">
-                <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="7" width="20" height="14" rx="2" ry="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></svg>
-              </div>
-              <h4>Maquinaria y Generadores</h4>
-              <p>Equipos de elevación, bombas centrífugas, grupos electrógenos y componentes de reemplazo original OEM.</p>
-            </div>
+            <article class="product-spec-card">
+              <h3>Cocinas industriales</h3>
+              <ul>
+                <li>Cambio y fabricación de inyectores</li>
+                <li>Ajuste de inyectores</li>
+                <li>Cambio de válvulas y termostatos</li>
+                <li>Mangueras para gas de alta presión</li>
+                <li>Limpieza técnica y diagnóstico</li>
+              </ul>
+            </article>
 
-            <div class="product-spec-card">
-              <div class="product-spec-card-icon" aria-hidden="true">
-                <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>
-              </div>
-              <h4>Insumos & Repuestos Críticos</h4>
-              <p>Filtros HVAC especializados, electrodos de soldadura, pernos de alta resistencia y accesorios eléctricos.</p>
-            </div>
+            <article class="product-spec-card">
+              <h3>Freidoras industriales</h3>
+              <ul>
+                <li>Mantenimiento preventivo y correctivo</li>
+                <li>Reparación de quemadores y controles</li>
+                <li>Cambio de termostatos y válvulas</li>
+                <li>Calibración y pruebas de seguridad</li>
+              </ul>
+            </article>
+
+            <article class="product-spec-card">
+              <h3>Refrigeración industrial</h3>
+              <ul>
+                <li>Mantenimiento preventivo y correctivo</li>
+                <li>Cambio de termostatos y sensores</li>
+                <li>Diagnóstico de funcionamiento</li>
+                <li>Detección de fallas y carga de refrigerante</li>
+                <li>Limpieza técnica</li>
+              </ul>
+            </article>
+
+            <article class="product-spec-card">
+              <h3>Cámaras de media y baja temperatura</h3>
+              <ul>
+                <li>Mantenimiento y atención de emergencias</li>
+                <li>Diagnóstico de fallas</li>
+                <li>Revisión de sistemas de refrigeración</li>
+                <li>Control y monitoreo de temperatura</li>
+                <li>Reparación de componentes</li>
+              </ul>
+            </article>
+
+            <article class="product-spec-card">
+              <h3>Extracción, campanas e inyección</h3>
+              <ul>
+                <li>Cambio de motores y correas</li>
+                <li>Mantención de poleas</li>
+                <li>Fabricación de cojinetes y soportes</li>
+                <li>Reparación mecánica</li>
+                <li>Evaluación y mejoras de proyectos</li>
+              </ul>
+            </article>
+
+            <article class="product-spec-card">
+              <h3>Trampas de grasa y desagües</h3>
+              <ul>
+                <li>Fabricación e instalación de trampas</li>
+                <li>Mantenimiento preventivo y correctivo</li>
+                <li>Limpieza y retiro de residuos</li>
+                <li>Destape de desagües</li>
+                <li>Modificaciones y mejoras</li>
+              </ul>
+            </article>
+
+            <article class="product-spec-card">
+              <h3>Sanitización y desinfección</h3>
+              <ul>
+                <li>Limpieza profunda de equipos</li>
+                <li>Sanitización de superficies</li>
+                <li>Limpieza con vapor</li>
+                <li>Hidrolavado industrial</li>
+                <li>Maquinaria especializada de aseo</li>
+              </ul>
+            </article>
+
+            <article class="product-spec-card">
+              <h3>Climatización</h3>
+              <ul>
+                <li>Mantenimiento de aire acondicionado</li>
+                <li>Diagnóstico y reparación</li>
+                <li>Instalación y mejoras</li>
+                <li>Proyectos de climatización</li>
+                <li>Venta y suministro de repuestos</li>
+              </ul>
+            </article>
+
+            <article class="product-spec-card">
+              <h3>Automatización, seguridad y alertas</h3>
+              <ul>
+                <li>Automatización de procesos</li>
+                <li>Implementación de equipamiento electrónico</li>
+                <li>Lectura digital de parámetros</li>
+                <li>Alerta de alta temperatura en campanas, cocinas y cámaras</li>
+                <li>Alerta de detención en extracción</li>
+                <li>Alarmas visuales y sonoras</li>
+              </ul>
+            </article>
           </div>
-
-          <a href="#contacto" class="btn btn-primary">Solicitar Catálogo Técnico</a>
+          <a href="#contacto" class="btn btn-primary">Cotizar servicio gastronómico</a>
         </div>
       </div>
     </section>
@@ -1515,10 +1530,9 @@
     <section class="contact" id="contacto">
       <div class="container">
         <div class="section-header">
-          <span class="section-eyebrow">Canales Corporativos</span>
           <h2 class="section-title">Iniciemos tu Próximo Proyecto</h2>
           <p class="section-desc">
-            Envíanos las especificaciones técnicas de tu requerimiento o solicita una visita de nuestros ingenieros a faena.
+            Cuéntanos qué necesitas en tu hogar, empresa, comercio o instalación industrial. Puedes contactarnos por teléfono, WhatsApp o correo.
           </p>
         </div>
 
@@ -1530,9 +1544,9 @@
                 <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
               </div>
               <div class="channel-body">
-                <h4>Teléfonos Directos</h4>
-                <p><a href="tel:+56912345678">+56 9 1234 5678 (WhatsApp Comercial)</a></p>
-                <p><a href="tel:+56223456789">+56 2 2345 6789 (Mesa Central)</a></p>
+                <h3>Teléfono y WhatsApp</h3>
+                <p><a href="tel:+56949856518">+56 9 4985 6518</a></p>
+                <p><a href="https://wa.me/56949856518?text=Hola%2C%20requiero%20informaci%C3%B3n%20sobre%20los%20servicios%20de%20NIETEC">Escribir por WhatsApp</a></p>
               </div>
             </div>
 
@@ -1541,9 +1555,8 @@
                 <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
               </div>
               <div class="channel-body">
-                <h4>Correos de Atención</h4>
-                <p><a href="mailto:contacto@nietec.cl">contacto@nietec.cl</a></p>
-                <p><a href="mailto:licitaciones@nietec.cl">licitaciones@nietec.cl</a></p>
+                <h3>Correo de contacto</h3>
+                <p><a href="mailto:nietecspa@gmail.com">nietecspa@gmail.com</a></p>
               </div>
             </div>
 
@@ -1552,56 +1565,63 @@
                 <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
               </div>
               <div class="channel-body">
-                <h4>Oficinas y Taller Central</h4>
-                <p>Av. Parque Industrial 4500, Módulo B</p>
-                <p>Santiago, Chile</p>
+                <h3>Sitio web oficial</h3>
+                <p><a href="https://www.nietec.cl">www.nietec.cl</a></p>
               </div>
             </div>
           </div>
 
           <!-- Formulario con selector interactivo -->
           <div class="contact-form-card">
-            <form id="contactForm">
+            <form id="contactForm" aria-describedby="formNotice">
+              <p class="form-group form-hint" id="formNotice">Completa tus datos para preparar tu consulta por WhatsApp. Al continuar se abrirá el chat de NIETEC con el mensaje listo para revisar y enviar. Los campos con * son obligatorios.</p>
               <div class="form-row">
                 <div class="form-group">
                   <label class="form-label" for="nombre">Nombre Completo *</label>
-                  <input type="text" id="nombre" name="nombre" class="form-control" placeholder="Ej. Carlos Mendoza" required>
+                  <input type="text" id="nombre" name="nombre" class="form-control" placeholder="Ej. Carlos Mendoza" autocomplete="name" maxlength="100" required>
                 </div>
                 <div class="form-group">
-                  <label class="form-label" for="empresa">Empresa / Organización *</label>
-                  <input type="text" id="empresa" name="empresa" class="form-control" placeholder="Ej. Constructora Andina" required>
+                  <label class="form-label" for="empresa">Empresa o lugar (opcional)</label>
+                  <input type="text" id="empresa" name="empresa" class="form-control" placeholder="Ej. Casa, local o empresa" maxlength="150">
                 </div>
               </div>
 
-              <div class="form-group">
-                <label class="form-label" for="email">Correo Corporativo *</label>
-                <input type="email" id="email" name="email" class="form-control" placeholder="carlos.mendoza@empresa.cl" required>
+              <div class="form-row">
+                <div class="form-group">
+                  <label class="form-label" for="email">Correo de contacto *</label>
+                  <input type="email" id="email" name="email" class="form-control" placeholder="nombre@correo.cl" autocomplete="email" maxlength="254" required>
+                </div>
+                <div class="form-group">
+                  <label class="form-label" for="telefono">Teléfono / WhatsApp de Contacto *</label>
+                  <input type="tel" id="telefono" name="telefono" class="form-control" placeholder="+56 9 1234 5678" autocomplete="tel" pattern="(\+?56[ \-]?)?[2-9]([ \-]?[0-9]){8}" title="Ingresa un teléfono chileno de 9 dígitos, con +56 opcional, separado por espacios o guiones." aria-describedby="telefonoHint" required>
+                  <small class="form-hint" id="telefonoHint">Teléfono chileno de 9 dígitos, con +56 opcional. Ej.: +56 9 1234 5678.</small>
+                </div>
               </div>
 
-              <!-- Selector visual de pills -->
+              <!-- Selector visual de pills accesible -->
               <div class="form-group">
-                <label class="form-label">Especialidad de Interés</label>
-                <input type="hidden" id="selectedService" name="servicio" value="Ingeniería y Proyectos">
-                <div class="pills-grid" role="group" aria-label="Seleccionar área técnica">
-                  <button type="button" class="service-pill active" data-val="Ingeniería y Proyectos">Ingeniería & Proyectos</button>
-                  <button type="button" class="service-pill" data-val="Instalaciones HVAC / Eléctricas">HVAC & Climatización</button>
-                  <button type="button" class="service-pill" data-val="Obras Civiles y Estructuras">Estructuras Metálicas</button>
-                  <button type="button" class="service-pill" data-val="Mantenimiento Facility">Facility Management</button>
-                  <button type="button" class="service-pill" data-val="Suministro de Equipos">Suministro de Equipos</button>
-                  <button type="button" class="service-pill" data-val="Licitación Pública/Privada">Licitaciones</button>
+                <span class="form-label" id="serviceLabel">Especialidad de Interés</span>
+                <input type="hidden" id="selectedService" name="servicio" value="Electricidad">
+                <div class="pills-grid" role="group" aria-labelledby="serviceLabel">
+                  <button type="button" class="service-pill active" data-val="Electricidad" aria-pressed="true">Electricidad</button>
+                  <button type="button" class="service-pill" data-val="Redes y sistemas de CCTV" aria-pressed="false">Redes y sistemas de CCTV</button>
+                  <button type="button" class="service-pill" data-val="Gasfitería" aria-pressed="false">Gasfitería</button>
+                  <button type="button" class="service-pill" data-val="Reparación de equipamiento gastronómico" aria-pressed="false">Reparación de equipamiento gastronómico</button>
+                  <button type="button" class="service-pill" data-val="Obras civiles" aria-pressed="false">Obras civiles</button>
+                  <button type="button" class="service-pill" data-val="Refrigeración y climatización" aria-pressed="false">Refrigeración y climatización</button>
+                  <button type="button" class="service-pill" data-val="Limpieza de desagües y alcantarillados" aria-pressed="false">Limpieza de desagües y alcantarillados</button>
+                  <button type="button" class="service-pill" data-val="Aseo industrial" aria-pressed="false">Aseo industrial</button>
                 </div>
               </div>
 
               <div class="form-group">
                 <label class="form-label" for="mensaje">Detalles del Requerimiento *</label>
-                <textarea id="mensaje" name="mensaje" class="form-control" placeholder="Describa brevemente ubicación de faena, requerimiento técnico o plazos estimados..." required></textarea>
+                <textarea id="mensaje" name="mensaje" class="form-control" placeholder="Describe el servicio o equipo, la ubicación y los plazos estimados..." maxlength="2000" aria-describedby="mensajeHint" required></textarea>
+                <small class="form-hint" id="mensajeHint">Solo texto, hasta 2.000 caracteres.</small>
               </div>
 
-              <button type="submit" class="btn btn-primary" style="width: 100%;">Enviar Solicitud de Cotización</button>
-
-              <div class="form-alert" id="formAlert">
-                ¡Gracias por su mensaje! El requerimiento ha sido registrado y un ingeniero técnico de NIETEC se pondrá en contacto a la brevedad.
-              </div>
+              <button type="submit" class="btn btn-primary" style="width: 100%;" disabled>Continuar en WhatsApp</button>
+              <noscript><p class="form-hint">Activa JavaScript para preparar el mensaje o <a href="https://wa.me/56949856518"><u>escríbenos directamente por WhatsApp</u></a>.</p></noscript>
             </form>
           </div>
         </div>
@@ -1621,7 +1641,7 @@
             NIETEC
           </a>
           <p>
-            Soluciones integrales de ingeniería, obras civiles, mantenimiento preventivo-correctivo y suministro técnico especializado. Seguridad, calidad y cumplimiento en cada obra.
+            Ingeniería y soluciones industriales. Desarrollamos, ejecutamos y mantenemos proyectos y servicios técnicos para clientes residenciales, comerciales e industriales.
           </p>
         </div>
 
@@ -1631,22 +1651,23 @@
             <li><a href="#inicio">Inicio</a></li>
             <li><a href="#nosotros">Nosotros</a></li>
             <li><a href="#servicios">Servicios</a></li>
-            <li><a href="#productos">Productos</a></li>
+            <li><a href="#marcas">Marcas</a></li>
+            <li><a href="#productos">Gastronomía</a></li>
             <li><a href="#contacto">Contacto</a></li>
           </ul>
         </div>
 
         <div class="footer-social">
-          <h4>Contacto & Redes</h4>
+          <h4>Canales de contacto</h4>
           <div class="social-links">
-            <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" class="social-btn" aria-label="LinkedIn">
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
+            <a href="https://wa.me/56949856518" class="social-btn" aria-label="WhatsApp de NIETEC">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
             </a>
-            <a href="mailto:contacto@nietec.cl" class="social-btn" aria-label="Correo">
+            <a href="mailto:nietecspa@gmail.com" class="social-btn" aria-label="Correo">
               <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
             </a>
-            <a href="#contacto" class="social-btn" aria-label="Ubicación">
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+            <a href="tel:+56949856518" class="social-btn" aria-label="Llamar a NIETEC">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
             </a>
           </div>
         </div>
@@ -1654,7 +1675,7 @@
 
       <div class="footer-bottom">
         <p>&copy; 2026 NIETEC. Todos los derechos reservados.</p>
-        <p>Ingeniería, Obras Civiles y Suministro Industrial.</p>
+        <p>Ingeniería y soluciones industriales.</p>
       </div>
     </div>
   </footer>
@@ -1683,14 +1704,18 @@
         });
       }
 
-      // Selector interactivo de Chips / Pills para el área de interés
+      // Selector interactivo de Chips / Pills para el área de interés (con estado ARIA)
       const pillButtons = document.querySelectorAll('.service-pill');
       const selectedServiceInput = document.getElementById('selectedService');
 
       pillButtons.forEach(btn => {
         btn.addEventListener('click', () => {
-          pillButtons.forEach(p => p.classList.remove('active'));
+          pillButtons.forEach(p => {
+            p.classList.remove('active');
+            p.setAttribute('aria-pressed', 'false');
+          });
           btn.classList.add('active');
+          btn.setAttribute('aria-pressed', 'true');
           if (selectedServiceInput) {
             selectedServiceInput.value = btn.getAttribute('data-val') || btn.textContent.trim();
           }
@@ -1717,20 +1742,34 @@
         });
       });
 
-      // Envío del formulario
+      // Preparar la consulta para revisarla y enviarla desde WhatsApp.
       const contactForm = document.getElementById('contactForm');
-      const formAlert = document.getElementById('formAlert');
 
-      if (contactForm && formAlert) {
+      if (contactForm) {
+        contactForm.querySelector('[type="submit"]').disabled = false;
         contactForm.addEventListener('submit', (e) => {
           e.preventDefault();
-          formAlert.classList.add('success');
-          contactForm.reset();
-          // Restaurar primer pill
-          pillButtons.forEach((p, idx) => p.classList.toggle('active', idx === 0));
-          setTimeout(() => {
-            formAlert.classList.remove('success');
-          }, 6000);
+          if (!contactForm.reportValidity()) return;
+          const data = new FormData(contactForm);
+          const company = data.get('empresa').trim();
+          const message = [
+            'Hola, equipo NIETEC. Me gustaría solicitar una cotización.',
+            '',
+            '*Servicio solicitado*',
+            data.get('servicio'),
+            '',
+            '*Detalle de la solicitud*',
+            data.get('mensaje').trim(),
+            '',
+            '*Datos de contacto*',
+            `Nombre: ${data.get('nombre').trim()}`,
+            ...(company ? [`Empresa o lugar: ${company}`] : []),
+            `Teléfono: ${data.get('telefono').trim()}`,
+            `Correo: ${data.get('email').trim()}`,
+            '',
+            '¿Podrían indicarme su disponibilidad y un presupuesto estimado?',
+          ].join('\n');
+          window.location.assign(`https://wa.me/56949856518?text=${encodeURIComponent(message)}`);
         });
       }
     });
